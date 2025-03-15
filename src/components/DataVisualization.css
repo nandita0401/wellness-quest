@@ -1,0 +1,34 @@
+.data-visual {
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  
+  .data-visual h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .counters {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .counter-box {
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    min-width: 120px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  

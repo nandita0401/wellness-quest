@@ -1,0 +1,39 @@
+.how-it-works {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: #fff;
+  }
+  
+  .how-it-works h2 {
+    margin-bottom: 3rem;
+  }
+  
+  .steps-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .step {
+    flex: 1 1 200px;
+    max-width: 220px;
+    padding: 2rem 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #fafafa;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background-color: #ff6e6c;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.2rem;
+  }
+  

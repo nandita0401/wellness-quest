@@ -1,0 +1,110 @@
+/* src/components/Auth.css */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fff, #fafafa);
+    padding: 2rem;
+  }
+  
+  .auth-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .auth-header {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .auth-brain-icon {
+    font-size: 3rem;
+    color: #ff6e6c;
+    animation: spin 4s linear infinite;
+    margin-bottom: 0.5rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+  
+  .input-group .icon {
+    margin-right: 0.5rem;
+    color: #ff6e6c;
+  }
+  
+  .input-group input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+  }
+  
+  .auth-button {
+    background-color: #ff6e6c;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-button:hover {
+    background-color: #ff4e4c;
+  }
+  
+  .auth-toggle {
+    margin-top: 1rem;
+  }
+  
+  .toggle-link {
+    color: #ff6e6c;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .toggle-link:hover {
+    color: #ff4e4c;
+  }
+  
+  .form-feedback {
+    margin-top: 1rem;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 0.75rem;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

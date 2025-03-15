@@ -1,0 +1,21 @@
+.about-team {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: #fff;
+  }
+  
+  .team-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .team-member {
+    max-width: 200px;
+    background: #fafafa;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  

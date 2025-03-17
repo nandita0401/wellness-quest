@@ -13,7 +13,7 @@ function Auth({ setIsAuthenticated }) {
   const [name, setName] = useState("");
 
   const navigate = useNavigate();
-  const API_URL = "http://127.0.0.1:8000/"; // Ensure this is your FastAPI backend URL
+  const API_URL = "http://127.0.0.1:8000/users";  // Ensure this is your FastAPI backend URL
 
   const handleToggle = () => {
     setIsSignIn(!isSignIn);

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+from datetime import datetime, timedelta, timezone
 
 # Define the directory to save the datasets
 dataset_dir = os.path.dirname(__file__)
@@ -175,25 +176,44 @@ activity_map = {
 ### 🔹 Generate Collaborative Filtering Dataset ###
 def generate_cf_dataset():
     num_samples = 2000
+    timestamps = [
+        (datetime.now(timezone.utc) - timedelta(days=np.random.randint(0, 30))).isoformat()
+        for _ in range(num_samples)
+    ]
+
     cf_data = pd.DataFrame({
         'user_id': np.random.randint(100, 500, num_samples),
         'activity_id': np.random.choice(sum(activity_map.values(), []), num_samples),
-        'rating': np.random.randint(3, 6, num_samples)  # Ratings between 3-5
+        'rating': np.random.randint(3, 6, num_samples),  # Ratings between 3-5
+        'timestamp': timestamps  # Added timestamps
     })
 
     cf_dataset_path = os.path.join(dataset_dir, "cf_training_data.csv")
     cf_data.to_csv(cf_dataset_path, index=False)
     print(f"Collaborative Filtering Dataset Created: {cf_dataset_path}")
 
+    
 ### 🔹 Generate XGBoost Training Dataset ###
 def generate_xgb_dataset():
     num_samples = 2000
+
+    timestamps = [
+        (datetime.now(timezone.utc) - timedelta(days=np.random.randint(0, 30))).isoformat()
+        for _ in range(num_samples)
+    ]
+    
     xgb_data = [
-        [np.random.randint(100, 500), mood, np.random.choice(activity_map[mood]), np.random.choice(activity_map[mood])]
-        for mood in np.random.choice(emotion_categories, num_samples)
+        [
+            np.random.randint(100, 500), 
+            mood, 
+            np.random.choice(activity_map[mood]), 
+            np.random.choice(activity_map[mood]),
+            timestamps[i]
+        ]
+        for i, mood in enumerate(np.random.choice(emotion_categories, num_samples))
     ]
 
-    df_xgb = pd.DataFrame(xgb_data, columns=["user_id", "mood", "recent_activity", "suggested_activity"])
+    df_xgb = pd.DataFrame(xgb_data, columns=["user_id", "mood", "recent_activity", "suggested_activity", "timestamp"])
     xgb_dataset_path = os.path.join(dataset_dir, "xgb_training_data.csv")
     df_xgb.to_csv(xgb_dataset_path, index=False)
     print(f"XGBoost Training Dataset Created: {xgb_dataset_path}")

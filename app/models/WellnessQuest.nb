@@ -1,0 +1,727 @@
+Notebook[{Cell[
+CellGroupData[{Cell[
+BoxData[{RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[
+{"Import"," ","Collaborative"," ","Filtering"," ","Data"}]," ","*)"}],"\n","cfData"}]," ","="," ",RowBox[
+{"Import","[",RowBox[{"CloudObject","[","\"https://www.wolframcloud.com/obj/nanditabharambe04/cf_training_data.csv\"","]"}],"]"}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{RowBox[{"Import"," ","Mood"}],"-",RowBox[
+{"Activity"," ","Data"}]}]," ","*)"}],"\n","xgbData"}]," ","="," ",RowBox[{"Import","[",RowBox[
+{"CloudObject","[","\"https://www.wolframcloud.com/obj/nanditabharambe04/xgb_training_data.csv\"","]"}],"]"}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{"(*"," ",RowBox[{"Display"," ","First"," ","Few"," ","Rows"}]," ","*)"}],"\n",RowBox[
+{"Take","[",RowBox[{"cfData",","," ","5"}],"]"}]}],"\n",RowBox[{RowBox[{"Take","[",RowBox[
+{"xgbData",","," ","5"}],"]"}],"\n"}]}],"Input",CellLabel -> "In[1]:= ",ExpressionUUID -> "a94a006b-88df-4adc-93c8-002885fd5111"],Cell[
+BoxData[
+RowBox[{"{",RowBox[{RowBox[{"{",RowBox[{"\"user_id\"",",","\"activity_id\"",",","\"rating\"",",","\"timestamp\""}],"}"}],",",RowBox[
+{"{",RowBox[{"233",",","\"Listen to Soothing Music Without Lyrics \[Dash] Helps quiet self-criticism and promote relaxation.\"",",","5",",",TemplateBox[
+{RowBox[{"\"March 7, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","7",",","21",",","38",",","24.69135808944702`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"392",",","\"Unfollow Triggers on Social Media \[Dash] Remove content that negatively affects self-perception.\"",",","4",",",TemplateBox[
+{RowBox[{"\"February 14, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","2",",","14",",","21",",","38",",","24.69156503677368`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"482",",","\"Set a Mini Goal & Achieve It \[Dash] Accomplish a small task to boost confidence.\"",",","4",",",TemplateBox[
+{RowBox[{"\"March 11, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","11",",","21",",","38",",","24.69157123565674`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"402",",","\"Mindful Coloring \[Dash] Draw or color to distract and reset your focus.\"",",","5",",",TemplateBox[
+{RowBox[{"\"March 14, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","14",",","21",",","38",",","24.691574096679688`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}]}],"}"}],StandardForm],"Output",CellLabel -> "Out[3]= ",
+ExpressionUUID -> "e729eacd-abbc-469e-8c45-2aa26419b163"],Cell[
+BoxData[RowBox[{"{",RowBox[
+{RowBox[{"{",RowBox[{"\"user_id\"",",","\"mood\"",",","\"recent_activity\"",",","\"suggested_activity\"",",","\"timestamp\""}],"}"}],",",RowBox[
+{"{",RowBox[{"469",",","\"Anxiety/Stress\"",",","\"Progressive Muscle Relaxation \[Dash] Tense each muscle for 5 sec, then release.\"",",","\"Stretching Routine \[Dash] Stretch arms, neck, and legs to release physical tension.\"",",",TemplateBox[
+{RowBox[{"\"March 12, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","12",",","21",",","38",",","24.70494508743286`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"332",",","\"Sadness/Despair\"",",","\"Mindful Walking \[Dash] Take a slow walk, paying attention to your breathing and steps.\"",",","\"Watch a Funny Clip \[Dash] Play a short funny video or meme to spark a smile.\"",",",TemplateBox[
+{RowBox[{"\"February 22, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","2",",","22",",","21",",","38",",","24.704963207244873`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"479",",","\"Anxiety/Stress\"",",","\"Write & Rip Technique \[Dash] Write down worries and tear the paper. Imagine throwing stress away.\"",",","\"4-7-8 Breathing \[Dash] Inhale for 4 sec, hold for 7 sec, exhale for 8 sec. Repeat 5 times.\"",",",TemplateBox[
+{RowBox[{"\"March 6, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","6",",","21",",","38",",","24.704966068267822`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}],",",RowBox[{"{",RowBox[{"125",",","\"Shame/Guilt\"",",","\"Draw a Representation of Your Shame \[Dash] Express emotions visually through drawing.\"",",","\"Guided Meditation on Self-Acceptance \[Dash] Sit quietly and focus on accepting your imperfections.\"",",",TemplateBox[
+{RowBox[{"\"March 5, 2025 9:38 pm\"",StyleBox["\"UTC\"","TimeZoneLabel"]}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","5",",","21",",","38",",","24.704967975616455`"}],"}"}],",","\"Instant\"",",","\"Gregorian\"",",","\"UTC\""}],"]"}]},
+"DateObject",Editable -> False]}],"}"}]}],"}"}],StandardForm],"Output",CellLabel -> "Out[4]= ",
+ExpressionUUID -> "25035ed1-4139-459f-b269-d866f5ef6fbf"]},Open],ExpressionUUID -> "5ff965b9-3488-4474-a72a-9eba1e44bc7e"],Cell[
+BoxData[
+{RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{RowBox[{RowBox[{RowBox[{"Extract"," ","Mood"}]," ","&"}]," ","Timestamp"," ","Columns"}],","," ",RowBox[
+{"Skipping"," ","Header"}]}]," ","*)"}],"\n","moods"}]," ","="," ",RowBox[{RowBox[
+{"Rest","[","xgbData","]"}],"[",RowBox[{"[",RowBox[{"All",","," ",RowBox[{"{",RowBox[
+{"5",","," ","2"}],"}"}]}],"]"}],"]"}]}],";"}],RowBox[{"\n","\n"}],RowBox[{RowBox[
+{RowBox[{RowBox[{"(*"," ",RowBox[{"Convert"," ","Full"," ","Timestamps"," ","to"," ","Only"," ","Dates"," ",RowBox[
+{"(",RowBox[{"Ignoring"," ","Time"}],")"}]}]," ","*)"}],"\n","dates"}]," ","="," ",RowBox[
+{"DateObject"," ","/@"," ",RowBox[{"(",RowBox[{RowBox[{RowBox[{"DateValue","[",RowBox[
+{"#",","," ",RowBox[{"{",RowBox[{"\"Year\"",","," ","\"Month\"",","," ","\"Day\""}],"}"}]}],"]"}]," ","&"}]," ","/@"," ",RowBox[
+{"moods","[",RowBox[{"[",RowBox[{"All",","," ","1"}],"]"}],"]"}]}],")"}]}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Count"," ","Number"," ","of"," ","Entries"," ","Per"," ","Date"}]," ","*)"}],"\n","dateCounts"}]," ","="," ",RowBox[
+{"Counts","[","dates","]"}]}],";"}],RowBox[{"\n","\n"}],RowBox[{RowBox[{RowBox[{"sortedCounts"," ","="," ",RowBox[
+{"SortBy","[",RowBox[{RowBox[{"Normal","[","dateCounts","]"}],","," ","First"}],"]"}]}],";"}]," "}],"\n",RowBox[
+{RowBox[{RowBox[{"sortedCountsList"," ","="," ",RowBox[{"List"," ","@@@"," ","sortedCounts"}]}],";"}]," ",RowBox[
+{"(*",RowBox[{RowBox[{" ",RowBox[{"Now"," ","it"}],"\[CloseCurlyQuote]"}],"s"," ","a"," ","valid"," ","dataset"}]," ","*)"}],"\n"}]}],
+"Input",CellLabel -> "In[5]:= ",ExpressionUUID -> "078d8695-721b-488b-bd7b-ea0b95885860"],Cell[
+BoxData[
+""],"Input",ExpressionUUID -> "f6e0b0b5-1984-4724-a166-56b6d2e10b0e"],Cell[
+CellGroupData[
+{Cell[
+BoxData[{RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Force"," ","conversion"," ","of"," ","all"," ","keys"," ","to"," ","DateObject"}]," ","*)"}],"\n","formattedDates"}]," ","="," ",RowBox[
+{"AssociationMap","[",RowBox[{RowBox[{RowBox[{"{",RowBox[{RowBox[{"DateObject","[","#","]"}],","," ",RowBox[
+{"dateCounts","[","#","]"}]}],"}"}]," ","&"}],","," ",RowBox[{"DateObject"," ","/@"," ",RowBox[
+{"Keys","[","dateCounts","]"}]}]}],"]"}]}],";"}],RowBox[{"\n","\n"}],RowBox[{"Keys","[","formattedDates","]"}],"\n",RowBox[
+{"Head"," ","/@"," ",RowBox[{"Keys","[","formattedDates","]"}]}],"\n",RowBox[{"lastDate"," ","="," ",RowBox[
+{"DateObject","[",RowBox[{"Max","[",RowBox[{"Keys","[","formattedDates","]"}],"]"}],"]"}]}],"\n",RowBox[
+{"Head","[","lastDate","]"}],RowBox[{"\n","\n"}],RowBox[{"Table","[",RowBox[{RowBox[
+{"{",RowBox[{"d",","," ",RowBox[{"First","[",RowBox[{"Flatten","[",RowBox[{"DateDifference","[",RowBox[
+{"d",","," ","lastDate",","," ","\"Day\""}],"]"}],"]"}],"]"}]}],"}"}],","," ",RowBox[
+{"{",RowBox[{"d",","," ",RowBox[{"Keys","[","formattedDates","]"}]}],"}"}]}],"]"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Define"," ","the"," ","reference"," ","date"}]," ","*)"}],"\n","lastDate"}]," ","="," ",RowBox[
+{"DateObject","[",RowBox[{"{",RowBox[{"2025",","," ","3",","," ","15"}],"}"}],"]"}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Ensure"," ","dates"," ","are"," ","in"," ","DateObject"," ","format"}]," ","*)"}],"\n","formattedDates"}]," ","="," ",RowBox[
+{"AssociationMap","[",RowBox[{RowBox[{RowBox[{"{",RowBox[{RowBox[{"DateObject","[","#","]"}],","," ",RowBox[
+{"dateCounts","[","#","]"}]}],"}"}]," ","&"}],","," ",RowBox[{"Keys","[","dateCounts","]"}]}],"]"}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Correct"," ","filter"," ","condition"," ","for"," ","last"," ","7"," ","days"}]," ","*)"}],"\n","lastWeekData"}]," ","="," ",RowBox[
+{"Select","[",RowBox[{"formattedDates",","," ","\n","  ",RowBox[{RowBox[{"(",RowBox[
+{"0"," ","\[LessEqual]"," ",RowBox[{RowBox[{"DateDifference","[",RowBox[{RowBox[{"#1","[",RowBox[
+{"[","1","]"}],"]"}],","," ","lastDate",","," ","\"Day\""}],"]"}],"[",RowBox[{"[","1","]"}],"]"}]," ","\[LessEqual]"," ","7"}],")"}]," ","&"}]}],"]"}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Display"," ","the"," ","extracted"," ","data"," ","for"," ","debugging"}]," ","*)"}],"\n","lastWeekData"}],"\n"}]}],
+"Input",CellLabel -> "In[10]:= ",ExpressionUUID -> "500e64eb-e7bc-4e54-b88a-9dbfa8f2b8f0"],Cell[
+BoxData[
+RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Wed 12 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","12"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sat 22 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","22"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Thu 6 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","6"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Wed 5 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","5"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Fri 21 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","21"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sat 15 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","15"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Mon 10 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","10"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Wed 19 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","19"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Mon 17 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","17"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Thu 27 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","27"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Thu 13 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","13"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Fri 14 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","14"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sat 1 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","1"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Mon 24 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","24"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Thu 20 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","20"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sat 15 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","15"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sun 16 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","16"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Tue 11 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","11"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Tue 25 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","25"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sun 23 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","23"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Tue 4 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","4"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sun 2 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","2"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Fri 7 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","7"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Fri 28 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","28"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sat 8 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","8"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Fri 14 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","14"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Tue 18 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","18"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Mon 3 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","3"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Sun 9 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","9"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",",TemplateBox[{RowBox[{"\"Wed 26 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","26"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False]}],"}"}],StandardForm],"Output",CellLabel -> "Out[11]= ",ExpressionUUID -> "b4e6a751-9d51-4431-87ff-da890e7cceeb"],Cell[
+BoxData[
+RowBox[{"{",RowBox[{"DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject",",","DateObject"}],"}"}],
+StandardForm],"Output",CellLabel -> "Out[12]= ",ExpressionUUID -> "4564e4f6-487b-4347-a0ed-5759a634a472"],Cell[
+BoxData[
+TemplateBox[{RowBox[{"\"Sat 15 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[
+{"{",RowBox[{"2025",",","3",",","15"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],StandardForm],"Output",CellLabel -> "Out[13]= ",ExpressionUUID -> "54f37344-c74f-4085-b624-a51b165d6dd5"],Cell[
+BoxData[
+"DateObject",StandardForm],"Output",CellLabel -> "Out[14]= ",ExpressionUUID -> "3bc9c7ea-c089-4166-9956-234586606d24"],Cell[
+BoxData[
+RowBox[{"{",RowBox[{RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Wed 12 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","12"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","3"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Sat 22 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","22"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","21"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Thu 6 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","6"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","9"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Wed 5 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","5"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","10"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Fri 21 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","21"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","22"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Sat 15 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","15"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","0"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Mon 10 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","10"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","5"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Wed 19 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","19"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","24"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Mon 17 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","17"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","26"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Thu 27 Feb 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","2",",","27"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","16"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Thu 13 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","3",",","13"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","2"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Fri 14 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","14"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","29"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Sat 1 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","1"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","14"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Mon 24 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","24"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","19"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Thu 20 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","20"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","23"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Sat 15 Feb 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","2",",","15"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","28"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Sun 16 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","16"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","27"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Tue 11 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","11"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","4"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Tue 25 Feb 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","2",",","25"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","18"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Sun 23 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","2",",","23"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","20"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Tue 4 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","4"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","11"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Sun 2 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","2"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","13"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Fri 7 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","3",",","7"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","8"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Fri 28 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","28"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","15"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Sat 8 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","8"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","7"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Fri 14 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","3",",","14"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","1"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Tue 18 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","18"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","25"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Mon 3 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","3"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","12"}],"}"}],",",RowBox[{"{",RowBox[{TemplateBox[
+{RowBox[{"\"Sun 9 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[
+{"2025",",","3",",","9"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",Editable -> False],",","6"}],"}"}],",",RowBox[
+{"{",RowBox[{TemplateBox[{RowBox[{"\"Wed 26 Feb 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","2",",","26"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],",","17"}],"}"}]}],"}"}],StandardForm],"Output",CellLabel -> "Out[15]= ",
+ExpressionUUID -> "ecd9ce63-7647-4a44-97f8-244739c39583"],Cell[
+BoxData[RowBox[{"\[LeftAssociation]",RowBox[
+{RowBox[{TemplateBox[{RowBox[{"\"Wed 12 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[
+{RowBox[{"{",RowBox[{"2025",",","3",",","12"}],"}"}],",","\"Day\""}],"]"}]},"DateObject",
+Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[{"\"Wed 12 Mar 2025\""}],RowBox[
+{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","12"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","65"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Sat 15 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","15"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Sat 15 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","15"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","78"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Mon 10 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","10"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Mon 10 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","10"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","58"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Thu 13 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","13"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Thu 13 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","13"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","65"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Tue 11 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","11"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Tue 11 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","11"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","67"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Sat 8 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","8"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Sat 8 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","8"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","63"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Fri 14 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","14"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Fri 14 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","14"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","62"}],"}"}]}],",",RowBox[{TemplateBox[{RowBox[
+{"\"Sun 9 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","9"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],"\[Rule]",RowBox[{"{",RowBox[{TemplateBox[{RowBox[
+{"\"Sun 9 Mar 2025\""}],RowBox[{"DateObject","[",RowBox[{RowBox[{"{",RowBox[{"2025",",","3",",","9"}],"}"}],",","\"Day\""}],"]"}]},
+"DateObject",Editable -> False],",","65"}],"}"}]}]}],"\[RightAssociation]"}],StandardForm],
+"Output",CellLabel -> "Out[19]= ",ExpressionUUID -> "030a2e58-2efb-4b2e-9cd0-56febbbe4754"]},
+Open],ExpressionUUID -> "49d343a5-b490-4fa3-b2bf-16f6cfe1392b"],Cell[
+BoxData[""],
+"Input",ExpressionUUID -> "fcdccd03-a977-4b94-bfe2-d23ef421c17c"],Cell[
+CellGroupData[
+{Cell[
+BoxData[{RowBox[{RowBox[{RowBox[{RowBox[{"(*",RowBox[{RowBox[{" ",RowBox[{"Ensure"," ","proper"," ","data"," ","extraction"," ","for"," ","last"," ","week"}],"\[CloseCurlyQuote]"}],"s"," ","data"}]," ","*)"}],"\n","formattedLastWeekDates"}]," ","="," ",RowBox[
+{RowBox[{RowBox[{"DateString","[",RowBox[{"#",","," ",RowBox[{"{",RowBox[{"\"DayNameShort\"",","," ","\" \"",","," ","\"Day\"",","," ","\"/\"",","," ","\"MonthShort\"",",","\" \""}],"}"}]}],"]"}]," ","&"}]," ","/@"," ",RowBox[
+{"(",RowBox[{RowBox[{"Keys","[","lastWeekData","]"}],"[",RowBox[{"[","All","]"}],"]"}],")"}]}]}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Bar"," ","Chart"," ","with"," ","Corrected"," ","Labels"}]," ","*)"}],"\n",RowBox[
+{"BarChart","[","\n","  ",RowBox[{RowBox[{"lastWeekData","[",RowBox[{"[",RowBox[{"All",","," ","2"}],"]"}],"]"}],","," ",RowBox[
+{"(*"," ",RowBox[{"Y","-",RowBox[{"Axis",":"," ",RowBox[{RowBox[{"Number"," ","of"," ","check"}],"-","ins"}]}]}]," ","*)"}],"\n","  ",RowBox[
+{"ChartLabels"," ","\[Rule]"," ",RowBox[{"Placed","[",RowBox[{"formattedLastWeekDates",","," ","Below"}],"]"}]}],","," ",RowBox[
+{"(*"," ",RowBox[{RowBox[{"Correct"," ","X"}],"-",RowBox[{"Axis"," ","Labels"}]}]," ","*)"}],"\n","  ",RowBox[
+{"ChartStyle"," ","\[Rule]"," ","\"Pastel\""}],","," ",RowBox[{"(*"," ",RowBox[{"Maintain"," ","Wellness"," ","Aesthetic"}]," ","*)"}],"\n","  ",RowBox[
+{"BarSpacing"," ","\[Rule]"," ","0.5"}],","," ",RowBox[{"(*"," ",RowBox[{"Prevent"," ","Overcrowding"}]," ","*)"}],"\n","  ",RowBox[
+{"AxesLabel"," ","\[Rule]"," ",RowBox[{"{","\n","    ",RowBox[{RowBox[{"Style","[",RowBox[
+{"\"Date\"",","," ",RowBox[{"RGBColor","[",RowBox[{"0.3",","," ","0.5",","," ","0.8"}],"]"}],","," ","Bold",","," ","16"}],"]"}],","," ","\n","    ",RowBox[
+{"Style","[",RowBox[{"\"Wellness Check-ins\"",","," ",RowBox[{"RGBColor","[",RowBox[
+{"0.3",","," ","0.5",","," ","0.8"}],"]"}],","," ","Bold",","," ","16"}],"]"}]}],"\n","  ","}"}]}],",","\n","  ",RowBox[
+{"ChartElementFunction"," ","\[Rule]"," ","\"GlassRectangle\""}],","," ",RowBox[{"(*"," ",RowBox[
+{"Elegant"," ","bars"}]," ","*)"}],"\n","  ",RowBox[{"LabelStyle"," ","\[Rule]"," ",RowBox[
+{"Directive","[",RowBox[{"Bold",","," ","Medium",","," ","12"}],"]"}]}],","," ",RowBox[
+{"(*"," ",RowBox[{"Readable"," ","Labels"}]," ","*)"}],"\n","  ",RowBox[{"ImageSize"," ","\[Rule]"," ","Large"}],",","\n","  ",RowBox[
+{"RotateLabel"," ","\[Rule]"," ","True"}],","," ",RowBox[{"(*"," ",RowBox[{RowBox[
+{"Rotate"," ","X"}],"-",RowBox[{"Labels"," ","for"," ","Better"," ","Fit"}]}]," ","*)"}],"\n","  ",RowBox[
+{"PlotLabel"," ","\[Rule]"," ",RowBox[{"Style","[",RowBox[{"\"\|01f33f Recent Wellness Check-ins\"",","," ",RowBox[
+{"RGBColor","[",RowBox[{"0.3",","," ","0.5",","," ","0.8"}],"]"}],","," ","Bold",","," ","18"}],"]"}]}],",","\n","  ",RowBox[
+{"Ticks"," ","\[Rule]"," ",RowBox[{"{",RowBox[{"None",","," ","Automatic"}],"}"}]}],","," ",RowBox[
+{"(*"," ",RowBox[{"Auto","-",RowBox[{"Adjust"," ","Tick"," ","Labels"}]}]," ","*)"}],"\n","  ",RowBox[
+{"BaseStyle"," ","\[Rule]"," ",RowBox[{"{",RowBox[{"FontFamily"," ","\[Rule]"," ","\"Arial\""}],"}"}]}]}]," ",RowBox[
+{"(*"," ",RowBox[{"Ensure"," ","Readable"," ","Font"}]," ","*)"}],"\n","]"}]}],"\n"}]}],
+"Input",CellLabel -> "In[20]:= ",ExpressionUUID -> "f0966cd2-6bd5-4360-9a64-fc4a9905d4bf"],Cell[
+BoxData[
+GraphicsBox[{{Opacity[0],PointBox[{{0.5133333333333333`,0.`},{8.333333333333334`,0.`}}]},{{},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[1.`,0.78`,0.2`]],{{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.761959`,0.470832`,
+0.940597`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[CompressedData[
+"1:eJyF0jsOAWEUxfGJ2AA7QKelNwWdQiQsQDGJSjIjYQksgSWwBJbAEui8Hxmv3txvFI6b4zvFJDO/am7+mVan7uUdxwmS0aPaDrpe4vvNb5htSr7z2Y97Zlvq/Z5sR304kO2pj0eyA/XpRHakPp/JTtSXC9mZ+nolu1APr2bU44+h5f+5p1Oym+U+3HNZ2d1yP+7FguxhuS/3Sln2tNyfe9P096KOfbo192+f2rFP7dinduxTO/apHfvUjn1qxz61Y5/a46OGlv/njn2y+3DHPtn9uGOf7L7csU92f+7YZ+RvAltTqQ=="],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiE0G5O2ty79kXCe7U85Kbe9m+6Lxgmrt4xyP7IgYw+GCPpmOCrdzqZyqv7ItmV95PN3z51L4opf/avPt73+DUoftFkePDt7f2Ra1f5Aov7QMyZJ+bPYyTfIdTx23XTr92NqCJl7YePZ259AVhHV0PVxUlPnlmX+SXde95nu9D+6J0EUehnKBXOHUs/v/PpvcD0J/MB4MDdqTesC8KupyaUSz8HKcOoZ/zGFMPP7YvWr7RqL/Q6pZ9kfyh/F13ruPWoTY5Y/XFtU/si35JFUz5FHnHvsisY+v1xNUvcOqQ+PR1UXIJMFAn+U5qj5MHRszO+c1x6xNe4tQRI8v3pq8Q6POef5OZa+Qf2BelEfC5ReG0bXdsga6esDTnnasgMKxeavPP3Mn+GqeOTTVNipzWQFcvXp6wQlQRGGjTFpzxKfuJW0f4B7NToexAV0eoCMy8IwQMNIkdsy4fXoc7lfDOmLDJ6QdQB/9MTwsxaWCg1YTK7EmZ+BanDrdkl5835wP9We145pnRtyeEU4nWD8Fk25tAHcraX77J9D4lrGNiysYVj3mA/mQTl5j/XuQZYR27daUVhbVBdtzuL78RBnRVzO3zsjv24fZHn3apwO5twPh4Hu/todIFjA/7Z28/TW/AHborpl+3fa4NdP6OhVsOyKbftS/qc5pi6KCCO5Vkn9sjHjUDmJzWGLfnhhRcsS+yTH634X4m7nw+WjKMlgyjJcNoyQDUAQBjEeUo"]]},{FaceForm[],RectangleBox[
+{0.6666666666666666`,0.`},{1.3333333333333335`,65.`}]}},Function[StatusArea[Slot[
+1],65]],TagBoxNote -> "65"],StyleBox["65",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[65,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.842163`,0.62107`,
+0.8495695714285715`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[CompressedData[
+"1:eJyF0j8OwXAYxvGfxgUcgdHqADrUZiJ1AEMTk6SVMBo5AkfgCBwBN8ANxOx/37eVeLx5eIYm7Wfqm2+5229FVedcUkwfzV4yiLzPt3i5kF3qscv35TXdlfp6JePeCGQ36ruNjHsnlN2pH/cy7pHuQf18knEfDWVP6vlXn7n+fsB9OpFx3+p9uJd0Bep6vpD7fCbjftD7cq/oPOrZ/bln/f3zd5/jtv+zT+vYp3Xs0zr2aR37tI59Wsc+rWOf1rFP6/lVfebYp3Xs0zr2aR37tI59Wsc+rWOf1rFPdn/u2GfqLwgsQfo="],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiDs4TOw7NfGBf5HRGZYXs3xv2RaK7w0/83AMUYQCDD/ZoOrQ3WQTZ3HppXySnlPbCcvEz+6JX9SUZ576+xKkjqesFj73ea/uiFdtjXRcyAxmpZ+a1rdF/jVNH7t8nMqskgfK+5Z/Xrux4QVgH0xzj708XPrcvCpl3f5pe8mP7Imv929N8jz3HqaO96NueG6uf2BfF9OpOmyJ1375IW+Q8w4HrT3Dq0Ah+ZXQz9ql9keuGMxbqgcAgEr/Q5Kne+RSnjp0264RvygKD6HC/vG6D7kP7ospZX3lNPJ7h1BGVu0w96BBQfrkog2PEc6COj+6vbn19jVvH1GPLrJTnAv25Voe30P/CI8I+l3dx0rrpCAxU9f1q3LUTgWG1+c75ZP6sFzh1iD1w81wlA4xhvqC3a0urgEH07/AB+XQX3HH+WOqeTsJBoPzyDN+rC62BQVRauPWNxgvcOo7wrNVZ1ffKvuj9f5dVc6WAHvb2eq5ze8srnDoaKnYJn+YCpomXnb3S9/c+I5xKblm/MtbhBcpfYPxl5M7+nLCOu/OqswL4gfJvF9wWifAkQseTROeHV7YDXf3wiUjEZC+gq1aWqiw4fRe3Pw5vt+JgXQ8M/TNG8i9X/APGR0TACUfr67jjo9Tosq9NN9DoG9YHPocvBKYSOb53r+O34k4li/1vf5/dAEyyqy68rlnpddO+SGfezQvrFuLO56Mlw2jJMFoyjJYMQB0AlsP2lA=="]]},{FaceForm[],RectangleBox[
+{1.6666666666666667`,0.`},{2.3333333333333335`,78.`}]}},Function[StatusArea[Slot[
+1],78]],TagBoxNote -> "78"],StyleBox["78",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[78,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.9133704285714286`,
+0.7086834285714285`,0.6405378571428572`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[
+CompressedData["1:eJyF0j0OAVEYheFL/HfsAJ2WBdyCzjQSFqCYUElmJCxB7AA7wA7EDsQOxA7EEvhmFHJODqeYZO5Tfm99PBuELedcnHt/+tN4Hma//6LR0Jb3kfsMfLuxab/fbNqbDVtB+iS0aT/sbdqfD5v2TttWlL5c2LSfTzbtmeSxJL3XtWlfr2zarxeb9lrVVpae3lf7Lrmv9vS+2tP7Vv7cV/sxua926DPwv/skhz7JoU9y6JMc+iSHPsmhT3Lokxz6JIc+yaFPcuiTHPokhz7JoU9y6FPcVzv0Ke6rHfoM/As0giCg"],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiSl2tVUf+PbQv+sj1Jlw5+Y590eSErGOKt2/aFzGAwQd7NB1F5TMTn7x4bV/k92oX75d3L+yLpjx4c9zj43OcOiQUf88LsXprX2RlYpfyQAjIYIl5fHgv61vCOsQ7pA6I3HplX3SLaZHTFP5XOHVohEwSje9/aV8kteeAtffCp/ZF+4y2OEUEPcGpg8ulRrgk45l90SxnbnfV1cAg6DbzcTcRf4BTx6re1M+66kB/SlxiCs6oemRftMPYfsWP17h11FWVrJz8Baij/W7xbJ6kx/ZFc52O74y88xCnjjcKFpsXLgEGKsf5jWseqwKd/0wnQuj4skeEff6AsS91lyzQ58HC501+LXqMU8fUX6HyufbAsOyb2hOs/AKoY9Hp3kjNMtxhdUl3Q6OWFjDOS57XR/y+Dww07q7VZnFFT3HqsLtS3G1xC6hDJCb9V9IqYBDEZR1e0O36DKcOt5QV4l7b3tgXHdH8aXltGjAIlv03Fiw2JyJdZfe/YpOyBwbB3737dY+9JkJHe77qvtsNQB1FbJNcc5xfENZx6ZKDGNceoA7+daZ9fpNw63jkKznL9xHQH+tmr12tfBKoMGESU8ONbNyuMhZpvnB6CzA+dNbvZGmKBQaRw9NdXB2vcceH7JSFUZ8ygUavmvLUIvUuMKqX8jNtXB+JO5UIPb/3N+chMN3tcelZf2EeMJ//V5L+b2Z3C6eO0ZJhtGQYLRlGSwagDgA9XuMq"]]},{FaceForm[],RectangleBox[
+{2.666666666666667`,0.`},{3.333333333333334`,58.`}]}},Function[StatusArea[Slot[1],
+58]],TagBoxNote -> "58"],StyleBox["58",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[58,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.9496274285714286`,
+0.8200274285714285`,0.5905707142857143`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[
+CompressedData["1:eJyF0jsOAWEYheGfaF134FJpWcAUdAqRoFcMKsmMhCWwBLED7EBiBSxBYgViCeb7KRwnh1NMMvNU8+Utj2a9sO6cizPJozON52H68y0a9m3ZIHLvffl2Y9N+u9q01yq2nPRJaNN+2Nm0P+427c2GLS99ubBpPx1t2lP+Y0F61f+/9nbLpn3s76N9vbJp3/v7ab+cbdpf99VeKvr9ub/2ge9PO/YZdIOffbJjn+zYJzv2yY59smOf7NgnO/bJjn2yY5/s2Cc79smOfbJjn+zYJzv2qe6rHftU99eOfSb+BJqfI2c="],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiGS9vOC7e+si+aMqi0s+Fvg/si9632P3+LHLDvogBDD7Yo+lQOCO5q5nlrX2Rfk1Yg6jSa/uiriXVTz6cfo5TxwPNxfyRye/si9JbNH/HegEZ+nM46pXl3hHWUSu71M7q0Rv7ohzF/y7xFq9w6nhbFLhJdjJQPrLcWENa7IV90Y7QN6fc1z3GqWOLpfw6LR+gq88/eu77yfuJfRFfd0zAgu93ceq4e0l4b5kQ0OirPSFLt8k8tS+aJWj0wHrffZw6Hm2q3cn8AqjjmrT95IdMz4CWuc2r2PLoAU4dBqx/b/HNf2lf1B1atqH4GFBH/gPunpI9D3HqeAfz+WmVgj1nDwE9NCMpYVft8Uc4dVgfvXBZwwsYcfy7D+/t6AI6T0evSvTIGtxh9cNIdbW5HTAazO4zznncBnTeCe6orvPbn+DU4dK65IzTV6COiQqCp+f6AZ33vPrFPOG5T3HqUFvTvE3gFjBd1c1t+H/KFui82dmRLPPmPSOcSip92K8w3QPqKLgb71uYTkRKnLm1xnspO9B5M05um3zqFhE6zusav5LVBepQnjfvzSynFzh17Gx4XHeZHajjzw0Xxc58kKsmv3mecR23PyT/VNkbHAEqfPsxV3MCCzB0uVJVGk+r4Q7dgy/VVbmTgAqVOxzWb2wAGv1Qdc8S83TcqeRh9Ls0xenANCHc67g9IwSYAKcKWX6fsBx3Ph8tGUZLhtGSYbRkAOoAALxX7dI="]]},{FaceForm[],RectangleBox[
+{3.6666666666666674`,0.`},{4.333333333333334`,65.`}]}},Function[StatusArea[Slot[1],
+65]],TagBoxNote -> "65"],StyleBox["65",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[65,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.9581918571428572`,
+0.9248882857142857`,0.6055372857142857`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[
+CompressedData["1:eJyF0sENwWAYxvEvYgFVA+DmygA9cHMQCQM4VJwkrURHYARGYAQOBsAGjMAK+vZz8Hjy8ByatL9b3399Mh/GLedcWs4f/Vm6iEufb8l+ZwuixL335ZezTfvzYdNeKVaV3mnbtI9HNu3Z0qZ9u7FpPx5s2u83m3b/MZTebNi097o27dPYpn29smn399V+Le6r3d9Xe1Dct/bnvtr9fbVjn6dB9LNPduyTHftkxz7ZsU927JMd+2THPtmxT3b/U0Pp2Cc79smOfbJjn+zYJzv2qe6rHftU99WOfeb+Al7yMoE="],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLwitwlHuq4+eGRfxL7ZKqvWCciYxcjea7nihn0RAxh8sEfTwbfUalGT+1v7IldJJtau02+AWttLtx9Re4FTh520+Y/Gle/si+ztP88RWwxkeG2TD+xIfUdYx/cPDx53uQEZkwr7avsmvsKpY8mL5+srLgDld9ctlTiuA2QkRAl3S3E/walD/ebhrV8an9sXPbA5UNG955l9UdPnpy1S6+/h1JH3vngGlxfQn/c6MmWD2oFaJ/qtK1OweYBTR4OT64IWxZf2Rcfb9bwEk4Fa7xpEPbvo8BCnjr/SV2LNbgF1HHowQ+m3HJBhc2yl5izpR4R9Pp8xnT9eHMjY1Gb7IVfjMU4diofKcrU6X9sXPUmq7426AtQRfDH5QTsf7rA60de1P6ceGNVdj0M37DsD1PrthvzjWOmnOHW4ZEjWylkAUwn709QfOzuBWrPuyE4vZXyGU4fCD+5Vf+SAUT2h26baqRioVbrdRaSX5TnhVLJK6N70NcxAxooDUW7VZ4nQ8V/bvzWeD5Qk9zWyH7MjIu3+/WrSxyABZKy5qtK0ZwluHQ3r8iU1fYEKbxSE3ylZBPTHhxVfnPttcbuqZEXDNG8WYBBZeHZuq/YHhu7y7bmcKztxx8dlDf+TS+cAE4f8bocE7ftAx+zSmvXV7hjudLVRrMmB9xAwFRUw39MI0wUyvG1PvJ1qdhOnjtGSYbRkGC0ZRksGoA4A30rkKg=="]]},{FaceForm[],RectangleBox[
+{4.666666666666667`,0.`},{5.333333333333334`,67.`}]}},Function[StatusArea[Slot[1],
+67]],TagBoxNote -> "67"],StyleBox["67",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[67,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.8992781428571429`,
+0.9456901428571428`,0.7131011428571428`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[
+CompressedData["1:eJyF0jEOAVEUheEXsQEKRkmpZQFTKCUSCQtQPFFJZiSUSrEDlsASWAJLEDsQSzD3PYXj5HCKSWa+bu7fnMyHvu2cy8vFoz/LF770+ZYdD7Zamrn3vvx6sWl/PmzaK2F16d2OTft4ZNO+Wtq073c27eeTTfv9ZtMePybSW2Hae2Hap96mfbuxaY/31R7vqz3eV3s13Lfx577a4321Y5/rQfqzT3bskx37ZMc+2bFPduyTHftkxz7ZsU/2+FMT6dgnO/bJjn2yY5/s2Ke6r3bskx37VPfVjn0W/gJhNy3W"],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiM6dTNWWOPrQvOllfWX184SP7IqV73/5enX/HvogBDD7Yo+mYprttzyeLN/ZFE/rPsmx/CmI8Uml42fwSpw47La2Tqlbv7IvShcp/ijsDGZ1n6t86ib3DqePlQa1nOjvfIun44r5C+13/a5w69mwq+H1iEtANty9Jnn5R9sq+yD72h+SG/09x6ihqORAarPDMvshug6N9gfFz+yLDUzM/7rnwEKcOhxKrYz0vgTrUFq658vIHUIfeeq79DCsf4dQR/LauUesIUCEv+0W1KWdf2BeJaL2urp39GKcOx10iV97XARV+b2r6fwcUqDe2a591zHiCU0fsuR+/PpcAFd6C+dzQ8yG3QRZun1vkrVphZghUeNTv9GJDXWCgtpzMrs22e4ZTR3HsbSlrdaDCFfOS8m0VgHG+N7LWNNrhOU4dekoOtbWPgTomSYl4tF0D6tC/vVp3qsgLnDqa1/ws5j8NVFj+9WNY4i5g5CduKpzFy407XVn/ijvyJxo5lVy7tXbm2z24dTRc6tz/NAtZx7wlX5iWsb/CqWOf3l/2wApkHVm9z6c89cKt48NkwW18v4D+KAqR6/38HKg16nW86VF73K7SFCvr27MKaOK2b9M6ty8DBlppoXnyx+244+O82FE/bntgWP5bN4dHyh1o9NG1wbfPSuNOJfx2aT9UtwDT9tmpbExpzcAke/j2N71JL3Hn89GSYbRkGC0ZRksGoA4Al4n/rg=="]]},{FaceForm[],RectangleBox[
+{5.666666666666667`,0.`},{6.333333333333334`,63.`}]}},Function[StatusArea[Slot[1],
+63]],TagBoxNote -> "63"],StyleBox["63",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[63,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.695512`,0.8505658571428572`,
+0.898783`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[CompressedData[
+"1:eJyF0jEOAUEYxfGJuAAlq0Cn5QBT0Ek2kXAAxYRKsivhCOIGHIEjcASOwBG4At+OQt7L4xWb7PzK79+cLkah45zLy+/PcJ4vQ+n7LzsebDWfuc/AL8W0Px827dWKrS6917Vpn4xt2tcrm/b9zqb9fLJpv99s2uNjIr3dsmkf9G3aZ8GmfbuxaY/31X4t7qs93ld7vG/jz321x/tqhz5T/7tPcuiTHPokhz7JoU9y6JMc+iSHPsmhT/L4nEiHPsmhT3Lokxz6JIc+yaFPcV/t0Ke4r3boM/Uv1Dsj/g=="],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyi3Sti1Evu3rYvWvhmmeDH8w/si1L3ZPcZbn1oX8QABh/s0XQsYrNkkW16YV8UIMtb5X34lX1R1PdT34+XvcapQ4i7wHTZ7Df2RXlhk3w7dwIZG3OeTbhy6A1OHWu4DZ6cTAMafT3rtVOPMRE63By+vd5v/9S+iOlQwuV7lkDnrfjpwHFP7SVOHcqX30i/CQf6U0krgoHt/RP7ojOnLmld43mGU8eHK4+E2FQe2RdNz/VwmbkOaJlW2hS7lhO4dQha75Qw4XhsXzQ3f+ntp3VAhSHTK3QWTXqOU8fE2qP+EieBOr5lRFidNQAqfDZHPO2B/QucOpo7DopK7AU6P1u/99QDKSJ83uLI0t7UAnR+78OSyJBzQB1W/+87ylzBrWOd9+lpzRVA5092fmKesQOo8E805xPJ3a9w6ihndd73xh7ofOWoiRW3s4EKexNXyEZk4E4l2pFbzPZrAB2zKL5MxdUDqLBFY/3Tpw644/zopJMMy0HO97oxxXXPpdeEU0ml6RPnL/xA5/OvOL3V8hEROl4eFz270wuoo/jkyVlaH4jQERRqPtE3Cuiq5md1H/lLgTpevBQrMc3BrePpe4kIxh/A+Hjb36l12RFo2ay1X4Rmu+MOXS+VuQ6LGoGp5NlbV6Gzn4ERs9W1968CG+5UkllmetFe8g4wDz6Kd2I6CMznZyeo3QqcgTufj5YMoyXDaMkwWjIAdQAA2SP5oA=="]]},{FaceForm[],RectangleBox[
+{6.666666666666667`,0.`},{7.333333333333334`,62.`}]}},Function[StatusArea[Slot[1],
+62]],TagBoxNote -> "62"],StyleBox["62",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[62,{Directive[Bold,Medium,12]}],"Tooltip"]]]},{Directive[
+EdgeForm[Directive[Thickness[Small],Opacity[0.644`]]],RGBColor[0.431296`,0.709773`,
+0.927077`]],TagBox[TooltipBox[TagBox[{{EdgeForm[],GraphicsComplexBox[CompressedData[
+"1:eJyF0sENwWAYxvEvYgELUI6uNUAPjg4iqQEcKk6SVsIIjFAjMAIjMAIjiBH0/T4SjyePPocm7e/UN//ubDnJ+s65olk9RotilTW+3/LjwdZOcvfej18vNu3Ph017y68jfRDbtE9Tm/bN2qa99NN+Ptm032827eFjVPP/2nt+2v15Yu1DP+3+fKn2eWbTHu6rfbe1ad/7+2sP/dX5p69knPztkx37ZMc+2bFPduyTHftkxz7ZsU927JM9HDWq+X/t2Cc79smOfbJjn+zYp7qvduyTHftkxz4rfwE/zyHv"],
+PolygonBox[CompressedData["1:eJxd0jkOwkAUg+EAYd/3nRB2OAsVR6CINBVFuL+ILVlCbn7Nk79y0vfnlU2iKMrjIs+Qf7P4/wql4hHKyByZFTHBsYIsxExwxBWWYiY4VpGVmAmONWQtZoJjHdmImeDYQLZiJjg2kZ2YCY4tJBEzwbGN7MVMcOwgqZgJjl3kIGaCYw85ipng2EdOYiY4DpCzmAmOQ+QiZoLjCLmKmeA4Rm5iJjjiE4a7mAmOU+Qh9gNmzF0e"]],
+VertexColors -> CompressedData["1:eJxTTMoPStNiYGAoZgESPpnFJWksyLyiveq+ByNkL9kXLarXO5ZTese+6Pj1i9nPnB/ZFzGAwQd7NB23OpJXT5N7al80yX6bvKn2S/uimqd/zsuEvMGpY234TENe77f2RV1CEybtagAypL9VJ81d9RanjpWvG6QjXz63L1IMZ4+9r/KasI5Hyx6c2pzzwL7ooXPJ54qjQOddyCteOeHjS5w6roh23ixvv2Zf5HNO40/Btof2RT1SBbs69z3DqWOHAtPW/VE37IvudAqtndoJDCL2a6wBCg3Pceo4s/vsx+tVt+yLJOy2aL0tfWxftGBzvcTsgBc4dfg3iGiIOgCj4Y/JxVMLbJ/YF/3zMaz2Zcbtj0PNJlwCMffsix74yzCfsSTC58dmPgidoAAMq72XN2hXcgA9rM+hyuO85BVOHdf8/V9P0AMG0fyc7iNLWYAeZtRKt2qb9BqnjtTP28TFFIFBVF80oSfwMlBH/GGJuRauuFNJtoDNBSUNYBBduLR1t8gRYBCJHC6bMV0Fd5zH/vx04ikrMIj+aOql9xe8JJxKMhkP5WsvBep457/9YNw2InTwvRfd2WwCDFQ31Zk/jb4SoeNpfOkzrhSgP2LmRTTkfQf6I0dT2dAlELeO9asY326cDoyPZU8uHppVD4wPcUm3xSnSuEP37bGtjXxtt+2LOBks/qR9BlrWcWTB+j3HcaerCVUpHRUMl+2L7i1MzGrZDkxgPZM52eTUcOfz0ZJhtGQYLRlGSwagDgBPi+m2"]]},{FaceForm[],RectangleBox[
+{7.666666666666667`,0.`},{8.333333333333334`,65.`}]}},Function[StatusArea[Slot[1],
+65]],TagBoxNote -> "65"],StyleBox["65",{Directive[Bold,Medium,12]},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[65,{Directive[Bold,Medium,12]}],"Tooltip"]]]}}},{},{}},{},{InsetBox[
+FormBox[StyleBox["\"Wed 12/3 \"",{Directive[Bold,Medium,12]},StripOnInput -> False],
+TraditionalForm],Offset[{0,-4},{1.`,0.`}],ImageScaled[{0.5`,1}]],InsetBox[FormBox[
+StyleBox["\"Sat 15/3 \"",{Directive[Bold,Medium,12]},StripOnInput -> False],TraditionalForm],
+Offset[{0,-4},{2.`,0.`}],ImageScaled[{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Mon 10/3 \"",
+{Directive[Bold,Medium,12]},StripOnInput -> False],TraditionalForm],Offset[{0,-4},
+{3.0000000000000004`,0.`}],ImageScaled[{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Thu 13/3 \"",
+{Directive[Bold,Medium,12]},StripOnInput -> False],TraditionalForm],Offset[{0,-4},
+{4.000000000000001`,0.`}],ImageScaled[{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Tue 11/3 \"",
+{Directive[Bold,Medium,12]},StripOnInput -> False],TraditionalForm],Offset[{0,-4},
+{5.`,0.`}],ImageScaled[{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Sat 08/3 \"",{Directive[
+Bold,Medium,12]},StripOnInput -> False],TraditionalForm],Offset[{0,-4},{6.`,0.`}],
+ImageScaled[{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Fri 14/3 \"",{Directive[Bold,
+Medium,12]},StripOnInput -> False],TraditionalForm],Offset[{0,-4},{7.`,0.`}],ImageScaled[
+{0.5`,1}]],InsetBox[FormBox[StyleBox["\"Sun 09/3 \"",{Directive[Bold,Medium,12]},
+StripOnInput -> False],TraditionalForm],Offset[{0,-4},{8.`,0.`}],ImageScaled[{0.5`,1}]]},{},{},{StyleBox[
+{Antialiasing -> False,{Directive[Thickness[Tiny]],{LineBox[{{0.5133333333333333`,0.`},{8.489733333333334`,0.`}}]},StyleBox[
+{Directive[Thickness[Tiny]],StyleBox[{InsetBox[FormBox[TagBox[StyleBox["\"Date\"",
+RGBColor[0.3`,0.5`,0.8`],Bold,16,StripOnInput -> False],HoldForm],TraditionalForm],
+Offset[{10.`,0.`},{8.333333333333334`,0.`}],NCache[ImageScaled[{0,Rational[1,2]}],
+ImageScaled[{0,0.5`}]],Automatic,{1,0}]},{{Directive[Bold,Medium,12]}},StripOnInput -> False]},
+{"GraphicsLabel"},StripOnInput -> False]},StyleBox[{{Directive[Thickness[Tiny]],LineBox[
+{{0.6666666666666666`,0.`},Offset[{-1.102182119232618`*^-15,-6.`},{0.6666666666666666`,0.`}]}],LineBox[
+{{8.333333333333334`,0.`},Offset[{-1.102182119232618`*^-15,-6.`},{8.333333333333334`,0.`}]}],{{},{},{},{},{},{},{},{},{},{}}},StyleBox[
+{},{"GraphicsLabel"},StripOnInput -> False]},{"GraphicsTicks"},StripOnInput -> False]},
+{"GraphicsAxes"},StripOnInput -> False]}},{DisplayFunction -> Identity,AspectRatio -> NCache[
+Power[GoldenRatio,-1],0.6180339887498948`],Axes -> {False,True},AxesLabel -> CompressedData[
+"1:eJxTTMoPSmNiYGAoZgESPpnFJRAeO5Bwyy/KdcqvgAiwAYmQxHQQnxXE5wASwSWVOalAkWCQpJJLYkmqUhozTDLI3ck5Pye/qMgYDC7bFzGAwQP7olkzQeClPdhOp/yclEwBIAPhjKDSnNRiHrAFRZkF/nmeeQWlJcUga90Sc4pTwcZ7ALWBHFjMD3JYUWJKZklmfl5iDkiMHC+IgLwQnpqTk5daXKzgnJGanK2bmVc8ODwEAO45ax4="],AxesOrigin -> {0.5133333333333333`,0.`},BaseStyle -> {FontFamily -> "Arial"},CoordinatesToolOptions -> CompressedData[
+"1:eJxTTMoPSmNiYGAoZgESPpnFJQheUGlOajA/kOGSWVyQk1jpVpqXXJKZn5fGCFLBASTgIqgmwOU9U1LzSjJLKhHyAYlFUHkQLzgnvyQTxAMT5OgDKUBzsTCQ4ZxfkJmaEpaYU5o6WF0NAFk5TEk="],FrameLabel -> {{None,None},{None,None}},FrameTicks -> {{Automatic,Automatic},{Automatic,Automatic}},GridLines -> {None,None},GridLinesStyle -> Directive[
+GrayLevel[0.5`,0.4`]],ImageSize -> Large,LabelStyle -> Directive[Bold,Medium,12],PlotLabel -> FormBox[
+StyleBox["\"\|01f33f Recent Wellness Check-ins\"",RGBColor[0.3`,0.5`,0.8`],Bold,18,
+StripOnInput -> False],TraditionalForm],PlotRange -> {{All,All},{All,All}},PlotRangePadding -> {{Scaled[
+0.02`],Scaled[0.02`]},{Scaled[0.02`],Scaled[0.05`]}},Ticks -> {None,Automatic}}],
+StandardForm],"Output",CellLabel -> "Out[21]= ",ExpressionUUID -> "1014de3e-2647-4bf8-ab3a-6dd90d52d0ac"]},
+Open],ExpressionUUID -> "ca6ddf34-9fe0-4f3e-affa-f7e167682cc9"],Cell[
+CellGroupData[
+{Cell[
+BoxData[{RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{"(*"," ",RowBox[{"Count"," ","occurrences"," ","of"," ","each"," ","mood"}]," ","*)"}]," ","\n","moodCounts"}]," ","="," ",RowBox[
+{"Counts","[",RowBox[{"xgbData","[",RowBox[{"[",RowBox[{RowBox[{"2"," ",";;"}],","," ","2"}],"]"}],"]"}],"]"}]}],";"}]," "}],"\n",RowBox[
+{"PieChart","["," ","\n",RowBox[{"moodCounts",","," ","\n",RowBox[{"ChartLabels"," ","\[Rule]"," ",RowBox[
+{"Placed","[",RowBox[{RowBox[{"Keys","[","moodCounts","]"}],","," ","\"RadialCallout\""}],"]"}]}],","," ","\n",RowBox[
+{"(*"," ",RowBox[{"Adds"," ","mood"," ","names"}]," ","*)"}]," ","\n",RowBox[{"ChartStyle"," ","\[Rule]"," ",RowBox[
+{"{"," ",RowBox[{RowBox[{"RGBColor","[",RowBox[{"0.4",","," ","0.7",","," ","0.9"}],"]"}],","," ","\n","\n",RowBox[
+{"(*"," ",RowBox[{"Blue"," ","for"," ","calm"," ","moods"}]," ","*)"}]," ","\n",RowBox[
+{"RGBColor","[",RowBox[{"0.9",","," ","0.6",","," ","0.6"}],"]"}],","," ","\n",RowBox[
+{"(*"," ",RowBox[{"Soft"," ","red"," ","for"," ","stressful"," ","moods"}]," ","*)"}]," ","\n",RowBox[
+{"RGBColor","[",RowBox[{"0.6",","," ","0.8",","," ","0.6"}],"]"}],","," ","\n",RowBox[
+{"(*"," ",RowBox[{"Green"," ","for"," ","balanced"," ","moods"}]," ","*)"}]," ","\n",RowBox[
+{"RGBColor","[",RowBox[{"0.9",","," ","0.8",","," ","0.4"}],"]"}]}]," ","\n",RowBox[
+{"(*"," ",RowBox[{"Yellow"," ","for"," ","energetic"," ","moods"}]," ","*)"}],"\n","}"}]}],","," ","\n",RowBox[
+{"ImageSize"," ","\[Rule]"," ","Large"}],",","\n",RowBox[{"PlotLabel"," ","\[Rule]"," ",RowBox[
+{"Style","[",RowBox[{"\"\|01f33f Mood Distribution\"",","," ",RowBox[{"RGBColor","[",RowBox[
+{"0.3",","," ","0.5",","," ","0.8"}],"]"}],","," ","Bold",","," ","18"}],"]"}]}]}]," ","]"}]}],
+"Input",CellLabel -> "In[22]:= ",ExpressionUUID -> "fcd3b9bf-7d30-4245-abf6-b1ca41afe352"],Cell[
+BoxData[
+GraphicsBox[{{},{},DynamicModuleBox[{Set[DynamicChart`click$85176$85600,False],Set[
+DynamicChart`click$85187$85600,False],Set[DynamicChart`click$85195$85600,False],Set[
+DynamicChart`click$85203$85600,False],Set[DynamicChart`click$85211$85600,False],Set[
+DynamicChart`click$85219$85600,False],Set[DynamicChart`click$85227$85600,False],Set[
+DynamicChart`click$85235$85600,False],Set[DynamicChart`click$85243$85600,False],Set[
+DynamicChart`click$85251$85600,False],Set[DynamicChart`click$85259$85600,False],Set[
+DynamicChart`click$85267$85600,False],Set[DynamicChart`click$85275$85600,False]},
+{{Directive[RGBColor[0.5`,0.5`,1.`],EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]]],{{{{{{},{{Directive[
+EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],RGBColor[0.4`,0.7`,0.9`]],TagBox[
+GeometricTransformationBox[TagBox[TagBox[TooltipBox[TagBox[{TagBox[DynamicBox[{FEPrivate`If[
+CurrentValue["MouseOver"],EdgeForm[{GrayLevel[0.5`],AbsoluteThickness[2.5`],Opacity[
+0.66`]}],{},{}],DiskBox[{0,0},1.`,{2.594955531865169`,3.141592653589793`}]}],"DelayedMouseEffectStyle"],{}},
+Function[StatusArea[Slot[1],174]],TagBoxNote -> "174"],StyleBox["174",{},StripOnInput -> False]],
+Function[Annotation[Slot[1],Style[174,{}],"Tooltip"]]],EventHandlerTag[{RuleDelayed[
+"MouseClicked",FEPrivate`Set[DynamicChart`click$85176$85600,FEPrivate`Not[DynamicChart`click$85176$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85176$85600,{{{1.`,0.`},{0.`,1.`}},{-0.19257608531171755`,0.05398565889209927`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85176$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.6`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{2.1519909677090086`,2.594955531865169`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],
+StyleBox["141",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85187$85600,
+FEPrivate`Not[DynamicChart`click$85187$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85187$85600,{{{1.`,0.`},{0.`,1.`}},{-0.14384370972513688`,0.13895678167153472`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85187$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.6`,0.8`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{1.6587609210954106`,2.1519909677090086`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],157]],TagBoxNote -> "157"],
+StyleBox["157",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[157,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85195$85600,
+FEPrivate`Not[DynamicChart`click$85195$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85195$85600,{{{1.`,0.`},{0.`,1.`}},{-0.06567442547393772`,0.1889096869900223`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85195$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.8`,0.4`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{1.1655308744818131`,1.6587609210954106`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],157]],TagBoxNote -> "157"],
+StyleBox["157",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[157,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85203$85600,
+FEPrivate`Not[DynamicChart`click$85203$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85203$85600,{{{1.`,0.`},{0.`,1.`}},{0.0315971457252798`,0.19748827910034417`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85203$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.4`,0.7`,0.9`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{0.6031857894892401`,1.1655308744818131`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],179]],TagBoxNote -> "179"],
+StyleBox["179",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[179,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85211$85600,
+FEPrivate`Not[DynamicChart`click$85211$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85211$85600,{{{1.`,0.`},{0.`,1.`}},{0.12675719351457576`,0.1547016932431846`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85211$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.6`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{0.10995574287564303`,0.6031857894892401`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],157]],TagBoxNote -> "157"],
+StyleBox["157",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[157,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85219$85600,
+FEPrivate`Not[DynamicChart`click$85219$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85219$85600,{{{1.`,0.`},{0.`,1.`}},{0.18741986982449177`,0.06981255184399553`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85219$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.6`,0.8`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-0.31101767270538927`,0.10995574287564303`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],134]],TagBoxNote -> "134"],
+StyleBox["134",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[134,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85227$85600,
+FEPrivate`Not[DynamicChart`click$85227$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85227$85600,{{{1.`,0.`},{0.`,1.`}},{0.19899020339626006`,-0.020072342970242928`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85227$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.8`,0.4`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-0.7791149780902686`,-0.31101767270538927`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],149]],TagBoxNote -> "149"],
+StyleBox["149",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[149,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85235$85600,
+FEPrivate`Not[DynamicChart`click$85235$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85235$85600,{{{1.`,0.`},{0.`,1.`}},{0.17101858092271682`,-0.10369496120439102`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85235$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.4`,0.7`,0.9`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-1.3006193585861743`,-0.7791149780902686`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],166]],TagBoxNote -> "166"],
+StyleBox["166",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[166,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85243$85600,
+FEPrivate`Not[DynamicChart`click$85243$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85243$85600,{{{1.`,0.`},{0.`,1.`}},{0.10126696147062653`,-0.17246739551146079`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85243$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.6`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-1.743583922742335`,-1.3006193585861743`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],
+StyleBox["141",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85251$85600,
+FEPrivate`Not[DynamicChart`click$85251$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85251$85600,{{{1.`,0.`},{0.`,1.`}},{0.009735088899123312`,-0.19976292960438424`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85251$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.6`,0.8`,0.6`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-2.186548486898496`,-1.743583922742335`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],
+StyleBox["141",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85259$85600,
+FEPrivate`Not[DynamicChart`click$85259$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85259$85600,{{{1.`,0.`},{0.`,1.`}},{-0.0768268372455405`,-0.1846554550476298`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85259$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.9`,0.8`,0.4`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-2.6766369408585042`,-2.186548486898496`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],156]],TagBoxNote -> "156"],
+StyleBox["156",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[156,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85267$85600,
+FEPrivate`Not[DynamicChart`click$85267$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85267$85600,{{{1.`,0.`},{0.`,1.`}},{-0.1516723830577444`,-0.13036674506017573`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85267$85600}]]],
+"DelayedClickEffect"]},{Directive[EdgeForm[Directive[GrayLevel[0],Opacity[0.5`]]],
+RGBColor[0.4`,0.7`,0.9`]],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{TagBox[DynamicBox[{FEPrivate`If[CurrentValue["MouseOver"],EdgeForm[{GrayLevel[
+0.5`],AbsoluteThickness[2.5`],Opacity[0.66`]}],{},{}],DiskBox[{0,0},1.`,{-3.141592653589793`,-2.6766369408585042`}]}],
+"DelayedMouseEffectStyle"],{}},Function[StatusArea[Slot[1],148]],TagBoxNote -> "148"],
+StyleBox["148",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[148,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85275$85600,
+FEPrivate`Not[DynamicChart`click$85275$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85275$85600,{{{1.`,0.`},{0.`,1.`}},{-0.19461970219642533`,-0.04607788533531809`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85275$85600}]]],
+"DelayedClickEffect"]}}}}},{}},{{}}}},{{{{TagBox[GeometricTransformationBox[TagBox[
+TagBox[TooltipBox[TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[
+0.5`]],LineBox[{{-0.9628804265585876`,0.2699282944604963`},{-1.0591684692144465`,0.29692112390654596`}}],LineBox[
+{{-1.0591684692144465`,0.29692112390654596`},{-1.1591684692144466`,0.29692112390654596`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.9628804265585876`,0.2699282944604963`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Anxiety/Stress\"",{},StripOnInput -> False],TraditionalForm],
+{-1.1976836862767901`,0.29692112390654596`},NCache[ImageScaled[{1,Rational[1,2]}],
+ImageScaled[{1,0.5`}]]]}}}},Function[StatusArea[Slot[1],174]],TagBoxNote -> "174"],
+StyleBox["174",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[174,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85176$85600,
+FEPrivate`Not[DynamicChart`click$85176$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85176$85600,{{{1.`,0.`},{0.`,1.`}},{-0.19257608531171755`,0.05398565889209927`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85176$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{-0.7192185486256844`,0.6947839083576736`},{-0.7911404034882529`,0.764262299193441`}}],LineBox[
+{{-0.7911404034882529`,0.764262299193441`},{-0.8911404034882529`,0.764262299193441`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.7192185486256844`,0.6947839083576736`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Sadness/Despair\"",{},StripOnInput -> False],TraditionalForm],
+{-0.9199091454332802`,0.764262299193441`},NCache[ImageScaled[{1,Rational[1,2]}],ImageScaled[
+{1,0.5`}]]]}}}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],StyleBox["141",
+{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],"Tooltip"]]],
+EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85187$85600,
+FEPrivate`Not[DynamicChart`click$85187$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85187$85600,{{{1.`,0.`},{0.`,1.`}},{-0.14384370972513688`,0.13895678167153472`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85187$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{-0.32837212736968857`,0.9445484349501115`},{-0.36120934010665745`,1.0390032784451229`}}],LineBox[
+{{-0.36120934010665745`,1.0390032784451229`},{-0.4612093401066575`,1.0390032784451229`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.32837212736968857`,0.9445484349501115`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Shame/Guilt\"",{},StripOnInput -> False],TraditionalForm],{-0.47434422520144504`,1.0390032784451229`},
+NCache[ImageScaled[{1,Rational[1,2]}],ImageScaled[{1,0.5`}]]]}}}},Function[StatusArea[
+Slot[1],157]],TagBoxNote -> "157"],StyleBox["157",{},StripOnInput -> False]],Function[
+Annotation[Slot[1],Style[157,{}],"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",
+FEPrivate`Set[DynamicChart`click$85195$85600,FEPrivate`Not[DynamicChart`click$85195$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85195$85600,{{{1.`,0.`},{0.`,1.`}},{-0.06567442547393772`,0.1889096869900223`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85195$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.157985728626399`,0.9874413955017208`},{0.17378430148903892`,1.086185535051893`}}],LineBox[
+{{0.17378430148903892`,1.086185535051893`},{0.27378430148903893`,1.086185535051893`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.157985728626399`,0.9874413955017208`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Curiosity/Awe\"",{},StripOnInput -> False],TraditionalForm],{0.2801037306340949`,1.086185535051893`},
+NCache[ImageScaled[{0,Rational[1,2]}],ImageScaled[{0,0.5`}]]]}}}},Function[StatusArea[
+Slot[1],157]],TagBoxNote -> "157"],StyleBox["157",{},StripOnInput -> False]],Function[
+Annotation[Slot[1],Style[157,{}],"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",
+FEPrivate`Set[DynamicChart`click$85203$85600,FEPrivate`Not[DynamicChart`click$85203$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85203$85600,{{{1.`,0.`},{0.`,1.`}},{0.0315971457252798`,0.19748827910034417`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85203$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.6337859675728788`,0.7735084662159231`},{0.6971645643301667`,0.8508593128375155`}}],LineBox[
+{{0.6971645643301667`,0.8508593128375155`},{0.7971645643301667`,0.8508593128375155`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.6337859675728788`,0.7735084662159231`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Love/Trust Issues\"",{},StripOnInput -> False],TraditionalForm],
+{0.8225160030330818`,0.8508593128375155`},NCache[ImageScaled[{0,Rational[1,2]}],ImageScaled[
+{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],179]],TagBoxNote -> "179"],StyleBox["179",
+{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[179,{}],"Tooltip"]]],
+EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85211$85600,
+FEPrivate`Not[DynamicChart`click$85211$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85211$85600,{{{1.`,0.`},{0.`,1.`}},{0.12675719351457576`,0.1547016932431846`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85211$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.9370993491224588`,0.3490627592199776`},{1.0308092840347047`,0.3839690351419754`}}],LineBox[
+{{1.0308092840347047`,0.3839690351419754`},{1.1308092840347048`,0.3839690351419754`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.9370993491224588`,0.3490627592199776`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Empathy/Compassion\"",{},StripOnInput -> False],TraditionalForm],
+{1.1682932579996033`,0.3839690351419754`},NCache[ImageScaled[{0,Rational[1,2]}],ImageScaled[
+{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],157]],TagBoxNote -> "157"],StyleBox["157",
+{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[157,{}],"Tooltip"]]],
+EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85219$85600,
+FEPrivate`Not[DynamicChart`click$85219$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85219$85600,{{{1.`,0.`},{0.`,1.`}},{0.18741986982449177`,0.06981255184399553`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85219$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.9949510169813002`,-0.10036171485121463`},{1.0944461186794303`,-0.1103978863363361`}}],LineBox[
+{{1.0944461186794303`,-0.1103978863363361`},{1.1944461186794304`,-0.1103978863363361`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.9949510169813002`,-0.10036171485121463`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Disappointment/Regret\"",{},StripOnInput -> False],TraditionalForm],
+{1.2342441593586824`,-0.1103978863363361`},NCache[ImageScaled[{0,Rational[1,2]}],
+ImageScaled[{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],134]],TagBoxNote -> "134"],
+StyleBox["134",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[134,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85227$85600,
+FEPrivate`Not[DynamicChart`click$85227$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85227$85600,{{{1.`,0.`},{0.`,1.`}},{0.19899020339626006`,-0.020072342970242928`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85227$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.8550929046135841`,-0.5184748060219551`},{0.9406021950749426`,-0.5703222866241506`}}],LineBox[
+{{0.9406021950749426`,-0.5703222866241506`},{1.0406021950749427`,-0.5703222866241506`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.8550929046135841`,-0.5184748060219551`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Anger/Resentment\"",{},StripOnInput -> False],TraditionalForm],
+{1.074805911259486`,-0.5703222866241506`},NCache[ImageScaled[{0,Rational[1,2]}],ImageScaled[
+{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],149]],TagBoxNote -> "149"],StyleBox["149",
+{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[149,{}],"Tooltip"]]],
+EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85235$85600,
+FEPrivate`Not[DynamicChart`click$85235$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85235$85600,{{{1.`,0.`},{0.`,1.`}},{0.17101858092271682`,-0.10369496120439102`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85235$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.5063348073531326`,-0.8623369775573039`},{0.5569682880884459`,-0.9485706753130343`}}],LineBox[
+{{0.5569682880884459`,-0.9485706753130343`},{0.6569682880884459`,-0.9485706753130343`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.5063348073531326`,-0.8623369775573039`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Comparison/Social Pressure\"",{},StripOnInput -> False],TraditionalForm],
+{0.6772216803825712`,-0.9485706753130343`},NCache[ImageScaled[{0,Rational[1,2]}],
+ImageScaled[{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],166]],TagBoxNote -> "166"],
+StyleBox["166",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[166,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85243$85600,
+FEPrivate`Not[DynamicChart`click$85243$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85243$85600,{{{1.`,0.`},{0.`,1.`}},{0.10126696147062653`,-0.17246739551146079`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85243$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{0.04867544449561655`,-0.9988146480219211`},{0.05354298894517821`,-1.0986961128241133`}}],LineBox[
+{{0.05354298894517821`,-1.0986961128241133`},{0.1535429889451782`,-1.0986961128241133`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{0.04867544449561655`,-0.9988146480219211`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Nostalgia/Irony\"",{},StripOnInput -> False],TraditionalForm],
+{0.15549000672500288`,-1.0986961128241133`},NCache[ImageScaled[{0,Rational[1,2]}],
+ImageScaled[{0,0.5`}]]]}}}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],
+StyleBox["141",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85251$85600,
+FEPrivate`Not[DynamicChart`click$85251$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85251$85600,{{{1.`,0.`},{0.`,1.`}},{0.009735088899123312`,-0.19976292960438424`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85251$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{-0.38413418622770246`,-0.9232772752381491`},{-0.4225476048504727`,-1.015605002761964`}}],LineBox[
+{{-0.4225476048504727`,-1.015605002761964`},{-0.5225476048504727`,-1.015605002761964`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.38413418622770246`,-0.9232772752381491`},
+0.016666666666666666`]},InsetBox[FormBox[StyleBox["\"Happiness/Joy\"",{},StripOnInput -> False],
+TraditionalForm],{-0.5379129722995809`,-1.015605002761964`},NCache[ImageScaled[{1,Rational[
+1,2]}],ImageScaled[{1,0.5`}]]]}}}},Function[StatusArea[Slot[1],141]],TagBoxNote -> "141"],
+StyleBox["141",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[141,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85259$85600,
+FEPrivate`Not[DynamicChart`click$85259$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85259$85600,{{{1.`,0.`},{0.`,1.`}},{-0.0768268372455405`,-0.1846554550476298`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85259$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{-0.7583619152887219`,-0.6518337253008787`},{-0.8341981068175941`,-0.7170170978309666`}}],LineBox[
+{{-0.8341981068175941`,-0.7170170978309666`},{-0.9341981068175941`,-0.7170170978309666`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.7583619152887219`,-0.6518337253008787`},0.016666666666666666`]},InsetBox[
+FormBox[StyleBox["\"Belonging/Connection\"",{},StripOnInput -> False],TraditionalForm],
+{-0.964532583429143`,-0.7170170978309666`},NCache[ImageScaled[{1,Rational[1,2]}],
+ImageScaled[{1,0.5`}]]]}}}},Function[StatusArea[Slot[1],156]],TagBoxNote -> "156"],
+StyleBox["156",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[156,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85267$85600,
+FEPrivate`Not[DynamicChart`click$85267$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85267$85600,{{{1.`,0.`},{0.`,1.`}},{-0.1516723830577444`,-0.13036674506017573`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85267$85600}]]],
+"DelayedClickEffect"],TagBox[GeometricTransformationBox[TagBox[TagBox[TooltipBox[
+TagBox[{{},{{},{{{Directive[Thickness[0.002`],Opacity[1],GrayLevel[0.5`]],LineBox[
+{{-0.9730985109821266`,-0.23038942667659046`},{-1.0704083620803393`,-0.2534283693442495`}}],LineBox[
+{{-1.0704083620803393`,-0.2534283693442495`},{-1.1704083620803394`,-0.2534283693442495`}}]},{Directive[
+Opacity[1],GrayLevel[0.5`]],DiskBox[{-0.9730985109821266`,-0.23038942667659046`},
+0.016666666666666666`]},InsetBox[FormBox[StyleBox["\"Pride/Confidence\"",{},StripOnInput -> False],
+TraditionalForm],{-1.2093323025196245`,-0.2534283693442495`},NCache[ImageScaled[{1,Rational[
+1,2]}],ImageScaled[{1,0.5`}]]]}}}},Function[StatusArea[Slot[1],148]],TagBoxNote -> "148"],
+StyleBox["148",{},StripOnInput -> False]],Function[Annotation[Slot[1],Style[148,{}],
+"Tooltip"]]],EventHandlerTag[{RuleDelayed["MouseClicked",FEPrivate`Set[DynamicChart`click$85275$85600,
+FEPrivate`Not[DynamicChart`click$85275$85600]]],PassEventsDown -> True,Method -> "Preemptive",PassEventsUp -> True}]],
+Dynamic[FEPrivate`If[DynamicChart`click$85275$85600,{{{1.`,0.`},{0.`,1.`}},{-0.19461970219642533`,-0.04607788533531809`}},
+{{1,0},{0,1}},{{1,0},{0,1}}],RuleDelayed[TrackedSymbols,{DynamicChart`click$85275$85600}]]],
+"DelayedClickEffect"]},{}}},{}},{},{}},RuleDelayed[DynamicModuleValues,{}]],{{{},{}}},{{{{},{},{},{}}},{}}},
+{DisplayFunction -> Identity,ContentSelectable -> False,GridLinesStyle -> Directive[
+GrayLevel[0.5`,0.4`]],ImageSize -> Large,PlotLabel -> FormBox[StyleBox["\"\|01f33f Mood Distribution\"",
+RGBColor[0.3`,0.5`,0.8`],Bold,18,StripOnInput -> False],TraditionalForm],PlotRange -> {{-1.3`,1.3`},{-1.3`,1.3`}},PlotRangePadding -> Scaled[
+0.07333333333333333`]}],StandardForm],"Output",CellLabel -> "Out[23]= ",ExpressionUUID -> "10f96f3e-7398-4a75-a2cb-bcaeff168778"]},
+Open],ExpressionUUID -> "116b538f-a843-4a30-8b7d-554c18ba0775"]},StyleDefinitions -> "Default.nb",
+FrontEndVersion -> "14.2 for Wolfram Cloud 1.70.1 (December 30, 2024)"]

@@ -8,6 +8,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
+    "axios": "^1.8.3",
     "chart.js": "^4.4.7",
     "confetti": "^2.0.6",
     "framer-motion": "^12.5.0",

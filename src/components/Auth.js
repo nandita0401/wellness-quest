@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
+import axios from "axios";
 import { FaUser, FaEnvelope, FaLock, FaBrain } from "react-icons/fa";
 
 function Auth({ setIsAuthenticated }) {
@@ -9,20 +10,54 @@ function Auth({ setIsAuthenticated }) {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
+  const API_URL = "http://127.0.0.1:8000/"; // Ensure this is your FastAPI backend URL
 
   const handleToggle = () => {
     setIsSignIn(!isSignIn);
     setError(null);
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Mock authentication success
+  //   setIsAuthenticated(true);
+  //   navigate("/dashboard");
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
-    // Mock authentication success
-    setIsAuthenticated(true);
-    navigate("/dashboard");
+    try {
+      if (isSignIn) {
+        // 🔹 Login Request
+        const response = await axios.post(`${API_URL}/login`, {
+          email,
+          password,
+        });
+
+        localStorage.setItem("token", response.data.access_token);
+        localStorage.setItem("email", email);
+        setIsAuthenticated(true);
+        navigate("/dashboard");
+      } else {
+        // 🔹 Signup Request
+        await axios.post(`${API_URL}/register`, {
+          name,
+          email,
+          password,
+        });
+
+        alert("Signup successful! Please login.");
+        setIsSignIn(true); // Switch to login view after signup
+      }
+    } catch (error) {
+      setError(error.response?.data?.detail || "Something went wrong");
+    }
   };
 
   return (

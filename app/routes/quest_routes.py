@@ -12,4 +12,8 @@ async def create_quest(quest: Quest):
 @router.get("/get_quests/{user_id}")
 async def get_quests(user_id: str):
     quests = await database["quests"].find({"user_id": user_id}).to_list(length=100)
+    # Convert MongoDB ObjectId to string for JSON serialization
+    for quest in quests:
+        quest["_id"] = str(quest["_id"])
+
     return {"quests": quests}

@@ -1,53 +1,59 @@
 /* src/components/Hero.css */
 .hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    /* Parallax-like background */
-    background: 
-      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-      url('../assets/landing-page-sample.png') center/cover no-repeat;
-    background-attachment: fixed; /* parallax effect */
-    color: #fff;
-    text-align: center;
-    position: relative;
-  }
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  
-  
-  .hero-content {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1rem;
-    animation: fadeInUp 1.2s ease-in-out forwards;
-    opacity: 0;
-    transform: translateY(30px);
+  /* Parallax-like background */
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+    url('../assets/bg-image.png') center/cover no-repeat;
+  background-attachment: fixed; /* parallax effect */
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+  animation: fadeInUp 1.2s ease-in-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-heading {
+  color: #ff4e4c;
+  font-style: italic;
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+/* Basic fadeInUp animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Basic fadeInUp animation */
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Reuse the CTA button styling from global or create new */
-  .cta-button {
-    padding: 0.8rem 1.5rem;
-    background-color: #ff6e6c;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 1.2rem;
-    transition: background-color 0.3s ease;
-  }
-  .cta-button:hover {
-    background-color: #ff4e4c;
-  }
-  
+}
+
+/* Reuse the CTA button styling from global or create new */
+.cta-button {
+  padding: 0.8rem 1.5rem;
+  background-color: #ff6e6c;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+.cta-button:hover {
+  background-color: #ff4e4c;
+}

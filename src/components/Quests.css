@@ -1,0 +1,278 @@
+.quests-container {
+    text-align: center;
+    padding: 100px 20px 20px; /* Added top padding to prevent overlap with navbar */
+  }
+  
+  .progress-bar {
+    width: 50%;
+    background: #ddd;
+    height: 20px; /* Increased height for better visibility */
+    border-radius: 10px;
+    margin: 20px auto; /* Adjusted margin */
+    overflow: hidden;
+    position: relative;
+    top: 10px; /* Push it down slightly */
+  }
+  
+  .progress {
+    height: 100%;
+    background: #ff6e6c;
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px;
+  }
+  
+  /* Ensure the quest list container uses flexbox */
+.quest-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  /* Style quest cards */
+.quest-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 230px; /* Set fixed width for all cards */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Ensure content is evenly distributed */
+    text-align: center;
+    min-height: 180px; /* Ensures all cards have equal height */
+  }
+
+  /* Ensure the XP text does not affect alignment */
+.quest-card p {
+    flex-grow: 1; /* Allows description to take available space */
+  }
+
+
+  
+  /* "Complete" button styling */
+.complete-btn {
+  padding: 10px;
+  background: #ff6e6c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Push the button to the bottom */
+}
+  
+.complete-btn:hover {
+    background: #e85c5a;
+  }
+  
+  .completed {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  /* When a quest is completed */
+.completed-text {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: auto; /* Ensures the text stays at the bottom */
+  }
+
+
+
+  /* Confetti effect will play when a new badge is unlocked */
+
+/* Badge Pop-up */
+.badge-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .badge-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .popup-badge-icon {
+    font-size: 3rem;
+    color: gold;
+    animation: bounce 1s infinite;
+  }
+  
+  .close-badge-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #ff6e6c;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .close-badge-btn:hover {
+    background: #e85c5a;
+  }
+  
+  /* Confetti animation */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+
+
+
+
+  
+
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back Panels */
+/* .suggestion-card {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+} */
+
+.mood-popup-content {
+    width: 750px; /* Fixed width */
+    height: auto; /* Keeps it flexible for content */
+    min-height: 350px; /* Prevents shrinking */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Keep the heading at the top */
+    padding: 20px;
+}
+
+/* Ensure the suggestion card flips correctly without mirroring */
+.suggestion-card {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+    position: absolute;
+    top: 50px;
+    left: 0;
+}
+
+.suggestion-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #444;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #444;
+    background: #fffae5;
+    padding: 30px 40px; /* Balanced padding */
+    border-radius: 12px;
+    border: 2px solid #facc15;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    
+    /* Set a proportional width similar to mood popup */
+    width: 70%; 
+    max-width: 600px;
+    min-width: 400px;
+
+    text-align: center;
+    line-height: 1.6;
+
+    /* Absolute centering */
+    /* position: absolute; */
+    position: relative;
+    margin: auto;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%) rotateY(180deg);
+
+    /* Flex to align text properly */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+}
+
+.mood-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+
+.suggestion-text:hover {
+    transform: translate(-50%, -50%) scale(1.05) rotateY(180deg);
+    background: #fff5cc;
+    border-color: #f59e0b;
+}
+
+.select-heading-card {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.close-button-card {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ff6e6c;
+    transition: transform 0.3s ease;
+}
+
+
+
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%) rotateY(180deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(180deg);
+    }
+}
+
+
+

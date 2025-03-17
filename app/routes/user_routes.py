@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Body
 from app.models.user import User
 from app.database import database
 from passlib.hash import bcrypt
@@ -34,7 +34,7 @@ async def register_user(user: User):
     return {"message": "User registered successfully"}
 
 @router.post("/login")
-async def login_user(email: str, password: str):
+async def login_user(email: str = Body(...), password: str = Body(...)):
     user = await database["users"].find_one({"email": email})
     if not user or not verify_password(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")

@@ -5,16 +5,12 @@ import './AboutTeam.css';
 function AboutTeam() {
   const teamMembers = [
     {
-      name: 'Alice',
-      role: 'Frontend Engineer',
+      name: 'Nandita Bharambe',
+      role: 'Developer',
     },
     {
-      name: 'Bob',
-      role: 'Backend Engineer',
-    },
-    {
-      name: 'Charlie',
-      role: 'UX/UI Designer',
+      name: 'Pavan More',
+      role: 'Developer',
     }
   ];
 

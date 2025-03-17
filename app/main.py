@@ -1,10 +1,20 @@
 from fastapi import FastAPI
 from app.routes import user_routes, mood_routes, quest_routes, suggestion_routes, recommendation
 from app.models import recommendation_model as recommendation_model
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Wellness Quest API",
     description="AI-Powered Recommendations for Mental Well-being"
+)
+
+# ✅ CORS Configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all domains (use specific domains in production)
+    allow_credentials=True,
+    allow_methods=["*"],   # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],   # Allows all headers
 )
 
 # ✅ Include existing routes

@@ -34,4 +34,8 @@ async def dismiss_suggestion(suggestion_id: str):
 @router.get("/get_dismissed_suggestions/{user_id}")
 async def get_dismissed_suggestions(user_id: str):
     suggestions = await database["suggestions"].find({"user_id": user_id, "dismissed_at": {"$ne": None}}).to_list(length=50)
+    # Convert MongoDB ObjectId to string for JSON serialization
+    for suggestion in suggestions:
+        suggestion["_id"] = str(suggestion["_id"])
+
     return {"dismissed_suggestions": suggestions}

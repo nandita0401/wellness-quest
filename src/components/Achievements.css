@@ -1,0 +1,87 @@
+.achievements-container {
+    margin-top: 80px; /* Pushes content below navbar */
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .achievements-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+  
+  .achievement-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .achievement-card {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Unlocked Badges */
+.achievement-card.unlocked {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: black;
+    border: 2px solid #FFC107;
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
+}
+
+.achievement-card.unlocked:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 193, 7, 0.7);
+}
+
+/* Locked Badges */
+.achievement-card.locked {
+    background: #d9d9d9;
+    color: #666;
+    border: 2px solid #b3b3b3;
+}
+
+.achievement-card.locked .locked-icon {
+    color: #888;
+}
+
+/* Badge Icons */
+.badge-icon {
+    font-size: 1.8rem;
+    margin-right: 8px;
+}
+  
+  
+  .unlocked {
+    background: #ffd700;
+  }
+  
+  .locked {
+    background: #ddd;
+    color: #666;
+  }
+  
+  .badge-icon {
+    color: #ff9800;
+    font-size: 1.5rem;
+  }
+  
+  .locked-icon {
+    color: #777;
+  }
+  
